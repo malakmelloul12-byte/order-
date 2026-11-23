@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نموذج الطلب السريع</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================
+       1. إعدادات الألوان (عدّليها حسب ذوق الزبون)
+       ========================================= */
+    :root {
+      --bg-color: #fdf8f6;        /* لون خلفية الصفحة */
+      --card-bg: #ffffff;         /* لون بطاقة النموذج */
+      --primary-color: #d48c95;   /* اللون الرئيسي للأزرار */
+      --primary-hover: #be747e;   /* لون الزر عند الضغط */
+      --text-main: #3a2e32;       /* لون النصوص الأساسية */
+      --text-muted: #7a6b70;      /* لون النصوص الثانوية */
+      --border-color: #eadadd;    /* لون حدود الخانات */
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px 14px;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--bg-color);
+      color: var(--primary-color);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 8px;
+    }
+
+    .header h1 {
+      margin: 4px 0;
+      font-size: 22px;
+      color: var(--text-main);
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 14px;
+      background-color: #fff;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary-color);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row .form-group {
+      flex: 1;
+    }
+
+    .summary-box {
+      background: var(--bg-color);
+      border: 1px dashed var(--primary-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- =========================================
+         2. معلومات المتجر (عدّلي الاسم والوصف هنا)
+         ========================================= -->
+    <div class="header">
+      <span class="badge">الدفع عند الاستلام</span>
+      <h1 id="storeTitle">متجر روزا للتجميل</h1>
+      <p id="storeSubtitle">املئي الاستمارة وسنتواصل معكِ لتأكيد الطلب</p>
+    </div>
+
+    <form id="orderForm">
+      <div class="form-group">
+        <label>الاسم الكامل *</label>
+        <input type="text" id="customerName" placeholder="أدخلي اسمك الكامل" required />
+      </div>
+
+      <div class="form-group">
+        <label>رقم الهاتف (واتساب) *</label>
+        <input type="tel" id="customerPhone" placeholder="مثال: 0600000000" required />
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <label>المدينة *</label>
+          <input type="text" id="customerCity" placeholder="المدينة" required />
+        </div>
+        <div class="form-group">
+          <label>الكمية *</label>
+          <input type="number" id="quantity" value="1" min="1" max="20" required />
+        </div>
+      </div>
+
+      <!-- =========================================
+           3. قائمة المنتجات والأثمنة (عدّليها حسب الزبون)
+           ========================================= -->
+      <div class="form-group">
+        <label>اختاري المنتج *</label>
+        <select id="productSelect" required>
+          <option value="سيروم الترطيب العميق" data-price="149">سيروم الترطيب العميق - 149 درهم</option>
+          <option value="مجموعة العناية اليومية" data-price="249">مجموعة العناية اليومية - 249 درهم</option>
+          <option value="كريم التفتيح الليلي" data-price="129">كريم التفتيح الليلي - 129 درهم</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>العنوان أو ملاحظة إضافية</label>
+        <textarea id="customerAddress" rows="2" placeholder="الحي، الشارع، أو اللون المطلوب..."></textarea>
+      </div>
+
+      <div class="summary-box">
+        <span>المجموع التقديري:</span>
+        <span id="totalPrice">149 درهم</span>
+      </div>
+
+      <button type="submit" class="btn-submit">تأكيد الطلب عبر واتساب</button>
+    </form>
+
+    <div class="footer-note">توصيل سريع إلى جميع المدن</div>
+  </div>
+
+  <script>
+    /* =========================================
+       4. إعدادات الواتساب والعملة (مهم جداً)
+       ========================================= */
+    const WHATSAPP_NUMBER = "212600000000"; // ضعي رقم الزبون بدون + أو 00 (مثال للمغرب: 2126...)
+    const CURRENCY = "درهم";
+
+    const productSelect = document.getElementById("productSelect");
+    const quantityInput = document.getElementById("quantity");
+    const totalPriceEl = document.getElementById("totalPrice");
+    const orderForm = document.getElementById("orderForm");
+
+    function updateTotal() {
+      const selectedOption = productSelect.options[productSelect.selectedIndex];
+      const price = parseFloat(selectedOption.getAttribute("data-price")) || 0;
+      const qty = parseInt(quantityInput.value) || 1;
+      const total = price * qty;
+      totalPriceEl.textContent = `${total} ${CURRENCY}`;
+      return total;
+    }
+
+    productSelect.addEventListener("change", updateTotal);
+    quantityInput.addEventListener("input", updateTotal);
+
+    orderForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("customerName").value.trim();
+      const phone = document.getElementById("customerPhone").value.trim();
+      const city = document.getElementById("customerCity").value.trim();
+      const address = document.getElementById("customerAddress").value.trim() || "غير محدد";
+      const product = productSelect.value;
+      const qty = quantityInput.value;
+      const total = updateTotal();
+
+      const message =
+        `السلام عليكم، أريد تأكيد طلب جديد:\n\n` +
+        `👤 الاسم: ${name}\n` +
+        `📞 الهاتف: ${phone}\n` +
+        `📍 المدينة: ${city}\n` +
+        `🏠 العنوان: ${address}\n` +
+        `🛍️ المنتج: ${product}\n` +
+        `🔢 الكمية: ${qty}\n` +
+        `💰 المجموع: ${total} ${CURRENCY}`;
+
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank");
+    });
+
+    updateTotal();
+  </script>
+
+</body>
+</html>
